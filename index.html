@@ -1,0 +1,301 @@
+<html lang="en">
+
+<head>
+  <title>Glimmer w/ Prism.js</title>
+
+  <meta charset="utf-8">
+  <meta name="description" content="Glimmer syntax highlighting powered by Prism.js" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Prism.JS does not ship ES Modules to CDNs... yet! -->
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-markdown.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-markup.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-markup-templating.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-javascript.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+
+
+  <!-- Hybrid Theme! -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css">
+
+  <!-- Additional themeing because PrismJS themes are basic -->
+  <style type="text/css">
+    .hljs-punctuation { color: #a9c; }
+    .hljs-attribute { color: #d38fae; }
+    .hljs-property { color: #feb39f; }
+    .hljs-class { color: #88f; }
+    .hljs-operator { color: #959; }
+    .hljs-comment { color: #888; }
+  </style>
+
+
+  <!-- For testing this library -->
+  <script type="module">
+    /* global Prism */
+    import * as samples from './demo/samples.js';
+    import { setup } from './src/index.js';
+
+    setup(Prism);
+
+    class State {
+      get qps() {
+        return new URLSearchParams(location.search);
+      }
+
+      get isDebugging() {
+        return this.qps.get('debug') === 'true';
+      }
+
+      get currentSampleKey() {
+        let validKeys = Object.keys(samples);
+        let fromQP = this.qps.get('sample');
+
+        return validKeys.includes(fromQP) ? fromQP : 'glimmer';
+      }
+
+      get currentSample() {
+        return samples[this.currentSampleKey];
+      }
+
+      navigateTo = (href, title = document.title) => {
+        history.pushState(null, title, href);
+        renderer.render();
+      };
+    }
+
+    class Renderer {
+      constructor() {
+        this._setupSampleNav();
+        this._setupDebug();
+        this._updateSampleNav();
+      }
+
+      render = () => {
+        this._updatePreview();
+        this._updateDebug();
+        this._updateSampleNav();
+        this._updateHighlightDebug();
+      };
+
+      _updatePreview = () => {
+        let { sample, language } = state.currentSample;
+        let preview = document.querySelector('pre code');
+
+        preview.innerHTML = Prism.highlight(sample.trim(), Prism.languages[language], language);
+      };
+
+      _setupSampleNav = () => {
+        let sampleNav = document.querySelector('#samples');
+        let sampleLinks = Object.entries(samples).map(([key, data]) => {
+          let link = document.createElement('a');
+          let qps = new URLSearchParams(location.search);
+
+          qps.set('sample', key);
+
+          link.href = `?${qps}`;
+          link.innerText = data.name;
+          link.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            state.navigateTo(e.target.href, data.name);
+          });
+
+          return link;
+        });
+
+        sampleNav.append(...sampleLinks);
+      };
+
+      _setupDebug = () => {
+        document.querySelector('#dev a').addEventListener('click', (e) => {
+          e.preventDefault();
+
+          state.navigateTo(e.target.href);
+        });
+      };
+
+      _updateSampleNav = () => {
+        document.querySelectorAll('#samples a').forEach((link) => {
+          let qps = new URLSearchParams(state.qps);
+          let linkQPs = new URLSearchParams(new URL(link.href).search);
+          let sampleKey = linkQPs.get('sample');
+
+          qps.set('sample', sampleKey);
+          link.href = `?${qps}`;
+
+          if (sampleKey === state.currentSampleKey) {
+            return link.classList.add('active');
+          }
+
+          link.classList.remove('active');
+        });
+      };
+
+      _updateDebug = () => {
+        let debugMode = document.querySelector('#dev a');
+
+        let qps = state.qps;
+        qps.set('debug', !state.isDebugging);
+
+        debugMode.href = `/?${qps}`;
+      };
+
+      _updateHighlightDebug = () => {
+        if (state.isDebugging) {
+          document.body.classList.add('debug-classes');
+          return;
+        }
+
+        document.body.classList.remove('debug-classes');
+      };
+    }
+
+    let state = new State();
+    let renderer = new Renderer();
+
+    // for debugging / inspecting
+    Object.assign(window, { Prism, state, renderer });
+
+    renderer.render();
+  </script>
+  <style>
+    @font-face {
+      font-family: dejavu-sans-mono;
+      src: url('./demo/DejaVuSansMono.ttf');
+    }
+
+    html,
+    body {
+      background-color: #181c24;
+      color: white;
+      padding: 0;
+      margin: 0;
+      font-family: system-ui, arial, sans-serif;
+      line-height: 1.35rem;
+    }
+
+    code {
+      font-family: dejavu-sans-mono, ui-monospace, monospace, sans-serif;
+    }
+
+    pre {
+      margin: 0;
+    }
+
+    pre code.hljs {
+      padding: 1rem;
+    }
+
+    section {
+      padding: 1rem;
+    }
+
+    section nav {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    section div {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    a {
+      color: #61aeee;
+    }
+
+    a.active {
+      color: #71beae;
+    }
+
+    hr {
+      margin: 1rem 0;
+      border: 1px solid black;
+    }
+
+    #samples {
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    #dev {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+    }
+
+    .debug-classes pre code span {
+      display: inline-block;
+      align-items: baseline;
+      padding: 0.25rem;
+      padding-bottom: 0.125rem;
+      padding-top: 0.5rem;
+      margin: 0.5rem 0.25rem 0.0rem 0.25rem;
+      border: 1px dashed #777;
+      border-radius: 5px;
+      white-space: pre;
+      position: relative;
+    }
+
+    .debug-classes pre code span:before {
+      display: inline-block;
+      content: attr(class);
+      font-size: 70%;
+      background: #693;
+      line-height: 1rem;
+      padding:1px 4px;
+      border-radius: 2px;
+      color:white;
+      margin-right:0.25rem;
+      font-weight: normal;
+      position: absolute;
+      top: -0.5rem;
+      left: -0.25rem;
+    }
+
+    .debug-classes pre code span:after {
+      /* this hidden element is for stretching the span
+         to be at least the width of the before pseudo element */
+      display: block;
+      opacity: 0;
+      font-size: 70%;
+      content: attr(class);
+      margin-top: -1.4rem;
+      position: relative;
+      top: -1rem;
+      left: -100%;
+    }
+  </style>
+</head>
+
+<body>
+  <section>
+    <h1>Glimmer for Prism.js</h1>
+    <div>
+      <nav>
+        <a href="https://github.com/NullVoxPopuli/prismjs-glimmer">GitHub</a>
+        <a href="https://www.npmjs.com/package/prismjs-glimmer">NPM</a>
+      </nav>
+      <code>npm install prismjs-glimmer</code>
+    </div>
+    <hr />
+    <nav id="samples">
+      <span>Samples:</span>
+    </nav>
+  </section>
+  <pre>
+    <code class="language-glimmer">
+    </code>
+  </pre>
+  <div id="dev">
+    <a href="#">Debug</a>
+  </div>
+</body>
+
+</html>

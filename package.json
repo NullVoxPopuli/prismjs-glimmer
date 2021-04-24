@@ -1,0 +1,62 @@
+{
+  "name": "prismjs-glimmer",
+  "version": "0.0.0",
+  "description": "Glimmer syntax highlighting with Prism.JS",
+  "main": "src/index.js",
+  "type": "module",
+  "repository": "git@github.com:NullVoxPopuli/prismjs-glimmer.git",
+  "author": "NullVoxPopuli",
+  "license": "MIT",
+  "scripts": {
+    "build": "node ./scripts/build.cjs",
+    "debug": "npx html-pages .",
+    "lint:js": "eslint .",
+    "lint": "eslint .",
+    "test": "yarn build && export NODE_OPTIONS='--experimental-vm-modules' && jest ."
+  },
+  "engines": {
+    "node": "> 10"
+  },
+  "jest": {
+    "transform": {},
+    "testRegex": [
+      "\\.test\\."
+    ]
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^12.1.1",
+    "@commitlint/config-conventional": "^12.1.1",
+    "@nullvoxpopuli/eslint-configs": "^1.2.0",
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/git": "^9.0.0",
+    "common-tags": "^1.8.0",
+    "esbuild": "^0.11.13",
+    "eslint": "^7.23.0",
+    "eslint-plugin-html": "^6.1.2",
+    "prismjs": "^1.23.0",
+    "jest": "^26.6.3",
+    "semantic-release": "^17.4.2"
+  },
+  "peerDependencies": {
+    "prismjs": "^1.23.0"
+  },
+  "release": {
+    "branches": [
+      "main",
+      "master"
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/github",
+      "@semantic-release/git"
+    ]
+  },
+  "volta": {
+    "node": "14.16.1",
+    "yarn": "1.22.10",
+    "npm": "7.8.0"
+  }
+}
