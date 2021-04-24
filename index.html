@@ -1,30 +1,26 @@
 <html lang="en">
 
 <head>
-  <title>Glimmer w/ Highlight.js</title>
+  <title>Glimmer w/ Prism.js</title>
 
   <meta charset="utf-8">
-  <meta name="description" content="Glimmer syntax highlighting powered by Highlight.js" />
+  <meta name="description" content="Glimmer syntax highlighting powered by Prism.js" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Highlight.JS does not ship ES Modules to CDNs... yet! -->
-  <script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.0.0-alpha0/highlight.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.0.0-alpha0/languages/javascript.min.js"></script>
+  <!-- Prism.JS does not ship ES Modules to CDNs... yet! -->
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-markdown.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-markup.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-markup-templating.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-javascript.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
 
 
   <!-- Hybrid Theme! -->
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.0.0-alpha0/styles/tomorrow-night.min.css"
-    integrity="sha256-SamwRCKvsKZ8zqKto5n4ytPPKOhPbBTbJdhJJK4Fjhw="
-    crossorigin="anonymous">
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.0.0-alpha0/styles/atom-one-dark-reasonable.min.css"
-    integrity="sha256-4rrI7w9n2l7crFHzQhumwTmY2FsIUlDA5JlQ8bRicmc="
-    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css">
 
-  <!-- We need to highlight some new features of hljs -->
+  <!-- Additional themeing because PrismJS themes are basic -->
   <style type="text/css">
     .hljs-punctuation { color: #a9c; }
     .hljs-attribute { color: #d38fae; }
@@ -37,11 +33,11 @@
 
   <!-- For testing this library -->
   <script type="module">
-    /* global hljs */
+    /* global Prism */
     import * as samples from './demo/samples.js';
     import { setup } from './src/index.js';
 
-    setup(hljs);
+    setup(Prism);
 
     class State {
       get qps() {
@@ -87,7 +83,7 @@
         let { sample, language } = state.currentSample;
         let preview = document.querySelector('pre code');
 
-        preview.innerHTML = hljs.highlight(sample.trim(), { language }).value;
+        preview.innerHTML = Prism.highlight(sample.trim(), Prism.languages[language], language);
       };
 
       _setupSampleNav = () => {
@@ -160,7 +156,7 @@
     let renderer = new Renderer();
 
     // for debugging / inspecting
-    Object.assign(window, { hljs, state, renderer });
+    Object.assign(window, { Prism, state, renderer });
 
     renderer.render();
   </script>
@@ -280,13 +276,13 @@
 
 <body>
   <section>
-    <h1>Glimmer for highlight.js</h1>
+    <h1>Glimmer for Prism.js</h1>
     <div>
       <nav>
-        <a href="https://github.com/NullVoxPopuli/highlightjs-glimmer">GitHub</a>
-        <a href="https://www.npmjs.com/package/highlightjs-glimmer">NPM</a>
+        <a href="https://github.com/NullVoxPopuli/prismjs-glimmer">GitHub</a>
+        <a href="https://www.npmjs.com/package/prismjs-glimmer">NPM</a>
       </nav>
-      <code>npm install highlightjs-glimmer</code>
+      <code>npm install prismjs-glimmer</code>
     </div>
     <hr />
     <nav id="samples">
@@ -294,7 +290,7 @@
     </nav>
   </section>
   <pre>
-    <code class="language-glimmer hljs">
+    <code class="language-glimmer">
     </code>
   </pre>
   <div id="dev">

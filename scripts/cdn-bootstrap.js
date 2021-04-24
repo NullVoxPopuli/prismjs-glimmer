@@ -1,5 +1,5 @@
-// requires hljs to be defined globally
+// requires Prism to be defined globally
 
-import glimmer from '../src/glimmer';
+import setup from '../src/glimmer';
 
-hljs.registerLanguage('glimmer', glimmer);
+setup(Prism);
