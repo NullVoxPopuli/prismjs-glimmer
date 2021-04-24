@@ -2,14 +2,14 @@
 
 const cwd = process.cwd();
 
-const hljs = require('highlight.js');
+const Prism = require('prismjs');
 
-const { glimmer } = require(`${cwd}/dist/glimmer.cjs`);
+const { setup } = require(`${cwd}/dist/glimmer.cjs`);
 
-hljs.registerLanguage('glimmer', glimmer);
+setup(Prism);
 
 function parse(code) {
-  return hljs.highlight(code, { language: 'glimmer' }).value;
+  return Prism.highlight(code, Prism.languages.glimmer, 'glimmer');
 }
 
 describe('NodeJS // require', () => {
