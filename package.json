@@ -1,6 +1,6 @@
 {
   "name": "prismjs-glimmer",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Glimmer syntax highlighting with Prism.JS",
   "main": "src/index.js",
   "type": "module",
