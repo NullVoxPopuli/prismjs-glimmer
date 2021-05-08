@@ -169,7 +169,7 @@ export default function setup(Prism) {
 
   INSIDE_MUSTACHE_AND_SUB_EXPRESSION['string'] = String.string;
 
-  const { markup } = Prism.languages;
+  const markup = Prism.languages.markup;
 
   if (!markup) {
     throw new Error('prism-markup is required');
