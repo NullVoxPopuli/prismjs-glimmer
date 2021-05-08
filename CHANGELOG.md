@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/NullVoxPopuli/prismjs-glimmer/compare/v1.1.0...v1.1.1) (2021-05-08)
+
+
+### Bug Fixes
+
+* **dist:** rebuild assets ([43e2f91](https://github.com/NullVoxPopuli/prismjs-glimmer/commit/43e2f91c96bdabd2e3e53e49caf65aa961f60f81))
+
 # [1.1.0](https://github.com/NullVoxPopuli/prismjs-glimmer/compare/v1.0.0...v1.1.0) (2021-05-08)
 
 
