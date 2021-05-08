@@ -15,7 +15,7 @@
     "test": "yarn build && export NODE_OPTIONS='--experimental-vm-modules' && jest ."
   },
   "engines": {
-    "node": "> 10"
+    "node": ">= 10"
   },
   "jest": {
     "transform": {},
