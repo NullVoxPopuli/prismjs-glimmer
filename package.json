@@ -16,7 +16,7 @@
     "test": "yarn build && export NODE_OPTIONS='--experimental-vm-modules' && jest ."
   },
   "engines": {
-    "node": ">= v14.17.0"
+    "node": ">= v14.19.3"
   },
   "jest": {
     "transform": {},
@@ -56,7 +56,7 @@
     ]
   },
   "volta": {
-    "node": "14.17.0",
+    "node": "14.19.3",
     "yarn": "1.22.10",
     "npm": "7.8.0"
   }
