@@ -40,7 +40,7 @@ jobs:
     # needs: [tests]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           ref: ${{ github.head_ref }}
           token: ${{ secrets.GitHubToken }}
@@ -57,7 +57,7 @@ jobs:
     # needs: [tests]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           persist-credentials: false
       - uses: volta-cli/action@v1
