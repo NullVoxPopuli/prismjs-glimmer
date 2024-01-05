@@ -2,42 +2,18 @@
   "name": "prismjs-glimmer",
   "version": "1.1.1",
   "description": "Glimmer syntax highlighting with Prism.JS",
+  "repository": "git@github.com:NullVoxPopuli/prismjs-glimmer.git",
+  "license": "MIT",
+  "author": "NullVoxPopuli",
+  "type": "module",
   "main": "dist/glimmer.cjs.cjs",
   "browser": "dist/glimmer.esm.min.js",
-  "type": "module",
-  "repository": "git@github.com:NullVoxPopuli/prismjs-glimmer.git",
-  "author": "NullVoxPopuli",
-  "license": "MIT",
   "scripts": {
     "build": "node ./scripts/build.cjs",
     "debug": "npx html-pages .",
-    "lint:js": "eslint .",
     "lint": "eslint .",
+    "lint:js": "eslint .",
     "test": "yarn build && export NODE_OPTIONS='--experimental-vm-modules' && jest ."
-  },
-  "engines": {
-    "node": ">= v14.17.0"
-  },
-  "jest": {
-    "transform": {},
-    "testRegex": [
-      "\\.test\\."
-    ]
-  },
-  "devDependencies": {
-    "@nullvoxpopuli/eslint-configs": "^1.2.5",
-    "@semantic-release/changelog": "^5.0.1",
-    "@semantic-release/git": "^9.0.0",
-    "common-tags": "^1.8.0",
-    "esbuild": "^0.11.23",
-    "eslint": "^7.26.0",
-    "eslint-plugin-html": "^6.1.2",
-    "prismjs": "^1.23.0",
-    "jest": "^26.6.3",
-    "semantic-release": "^17.4.3"
-  },
-  "peerDependencies": {
-    "prismjs": "^1.23.0"
   },
   "release": {
     "branches": [
@@ -53,10 +29,35 @@
       "@semantic-release/git"
     ]
   },
+  "jest": {
+    "testRegex": [
+      "\\.test\\."
+    ],
+    "transform": {}
+  },
+  "devDependencies": {
+    "@nullvoxpopuli/eslint-configs": "^1.2.5",
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/git": "^9.0.0",
+    "common-tags": "^1.8.0",
+    "esbuild": "^0.11.23",
+    "eslint": "^7.26.0",
+    "eslint-plugin-html": "^6.1.2",
+    "jest": "^26.6.3",
+    "prismjs": "^1.23.0",
+    "release-plan": "^0.6.0",
+    "semantic-release": "^17.4.3"
+  },
+  "peerDependencies": {
+    "prismjs": "^1.23.0"
+  },
+  "engines": {
+    "node": ">= v14.17.0"
+  },
   "volta": {
     "node": "20.10.0",
-    "yarn": "1.22.19",
     "npm": "7.8.0",
+    "yarn": "1.22.19",
     "pnpm": "8.14.0"
   }
 }
