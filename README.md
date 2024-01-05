@@ -8,8 +8,6 @@ glimmer syntax highlighting with [Prism.js](https://github.com/PrismJS/prism)
 ## Install
 
 ```bash
-yarn add prismjs-glimmer
-# or
 npm install prismjs-glimmer
 ```
 
@@ -84,7 +82,7 @@ NODE_OPTIONS="--experimental-vm-modules" node your-module-script.js
 
 ## Contributing
 
-Debug with `yarn debug -p 4201`
+Debug with `pnpm debug -p 4201`
 Visit `http://localhost:4201`
 
 Run Tets with `yarn test` or `npm run test`
