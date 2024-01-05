@@ -15,20 +15,6 @@
     "lint:js": "eslint .",
     "test": "pnpm build && export NODE_OPTIONS='--experimental-vm-modules' && jest ."
   },
-  "release": {
-    "branches": [
-      "main",
-      "master"
-    ],
-    "plugins": [
-      "@semantic-release/commit-analyzer",
-      "@semantic-release/release-notes-generator",
-      "@semantic-release/changelog",
-      "@semantic-release/npm",
-      "@semantic-release/github",
-      "@semantic-release/git"
-    ]
-  },
   "jest": {
     "testRegex": [
       "\\.test\\."
@@ -37,16 +23,13 @@
   },
   "devDependencies": {
     "@nullvoxpopuli/eslint-configs": "^1.2.5",
-    "@semantic-release/changelog": "^5.0.1",
-    "@semantic-release/git": "^9.0.0",
     "common-tags": "^1.8.0",
     "esbuild": "^0.11.23",
     "eslint": "^7.26.0",
     "eslint-plugin-html": "^6.1.2",
     "jest": "^26.6.3",
     "prismjs": "^1.23.0",
-    "release-plan": "^0.6.0",
-    "semantic-release": "^17.4.3"
+    "release-plan": "^0.6.0"
   },
   "peerDependencies": {
     "prismjs": "^1.23.0"
