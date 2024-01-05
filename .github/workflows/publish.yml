@@ -50,7 +50,7 @@ jobs:
           node-registry-url: 'https://registry.npmjs.org'
       
       - name: npm publish
-        run: pnpm release-plan publish
+        run: pnpm release-plan publish --singlePackage=prismjs-glimmer
       
         env:
           GITHUB_AUTH: ${{ secrets.GITHUB_TOKEN }}
