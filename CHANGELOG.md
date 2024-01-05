@@ -1,3 +1,5 @@
+# Changelog
+
 ## [1.1.1](https://github.com/NullVoxPopuli/prismjs-glimmer/compare/v1.1.0...v1.1.1) (2021-05-08)
 
 
