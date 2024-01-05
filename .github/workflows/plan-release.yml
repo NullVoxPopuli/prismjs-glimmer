@@ -56,7 +56,7 @@ jobs:
         run: |
           set -x
           
-          pnpm release-plan prepare
+          pnpm release-plan prepare --singlePackage=prismjs-glimmer
           
           echo 'text<<EOF' >> $GITHUB_OUTPUT
           jq .description .release-plan.json -r >> $GITHUB_OUTPUT
