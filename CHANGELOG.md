@@ -1,4 +1,19 @@
 # Changelog
+## Release (2024-01-05)
+
+prismjs-glimmer 1.1.2 (patch)
+
+#### :house: Internal
+* `prismjs-glimmer`
+  * [#53](https://github.com/NullVoxPopuli/prismjs-glimmer/pull/53) Add header to changelog ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#52](https://github.com/NullVoxPopuli/prismjs-glimmer/pull/52) Use --singlePackage for release-plan ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#51](https://github.com/NullVoxPopuli/prismjs-glimmer/pull/51) Remove semantic-release ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#49](https://github.com/NullVoxPopuli/prismjs-glimmer/pull/49) Release plan ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#48](https://github.com/NullVoxPopuli/prismjs-glimmer/pull/48) Remove commit linting ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#46](https://github.com/NullVoxPopuli/prismjs-glimmer/pull/46) Switch to pnpm ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 1
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
 
 ## [1.1.1](https://github.com/NullVoxPopuli/prismjs-glimmer/compare/v1.1.0...v1.1.1) (2021-05-08)
 
