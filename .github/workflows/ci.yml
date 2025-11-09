@@ -17,7 +17,7 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: wyvox/action-setup-pnpm@v3
       - run: pnpm lint
 
@@ -25,7 +25,7 @@ jobs:
     name: Base Tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: wyvox/action-setup-pnpm@v3
       - run: pnpm test
 
